@@ -26,7 +26,7 @@ public class menu {
                 System.out.println("Se procedera a consultar el saldo, espere por favor...");
                 break;
             case 3:
-                System.out.println("Desconectando del servidor...");
+                System.out.println("Desconectando del server...");
                 break;
             default:
                 System.out.println("Opción erronea, solo valores entre 1 y 3");
