@@ -19,7 +19,7 @@ public class Cliente {
     public static void main(String[] args) {
         String ipConection = args[0];
         String conectionPort = args[1];
-        String menuResult  = String.valueOf(menu.MenuOptions());
+        String menuResult = String.valueOf(menu.MenuOptions());
 
         if (menuResult.equals("1") || menuResult.equals("2")) {
             try {
@@ -27,13 +27,17 @@ public class Cliente {
                 dos = new DataOutputStream(client.getOutputStream());
                 String data = menuResult;
                 dos.writeUTF(data);
+
+                dis = new DataInputStream(client.getInputStream());
+                System.out.println("O server devolve: " + dis.readUTF());
+
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
         } else if (menuResult.equals("3")) {
             System.exit(0);
         }
-
 
 
     }
