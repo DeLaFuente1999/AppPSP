@@ -8,10 +8,10 @@ import java.net.Socket;
 public class Servidor {
 
     private static final int PORT = 9500;
-    private ServerSocket server = null;
-    private Socket client = null;
-    private DataOutputStream dos = null;
-    private DataInputStream dis = null;
+    private final ServerSocket server = null;
+    private final Socket client = null;
+    private final DataOutputStream dos = null;
+    private final DataInputStream dis = null;
     public static void main(String[] args) {
 
 
