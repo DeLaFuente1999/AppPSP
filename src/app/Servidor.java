@@ -1,5 +1,7 @@
 package app;
 
+import utilities.ThreadServer;
+
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -20,11 +22,12 @@ public class Servidor {
             System.out.println("SERVIDOR INICIADO...");
             while (true) {
                 client = server.accept();
+                ThreadServer thread = new ThreadServer(client);
+                thread.start();
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-
 
     }
 }
