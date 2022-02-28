@@ -19,13 +19,12 @@ public class Cliente {
     public static void main(String[] args) {
         String ipConection = args[0];
         String conectionPort = args[1];
-
         String menuResult  = String.valueOf(menu.MenuOptions());
 
         if (menuResult.equals("1") || menuResult.equals("2")) {
             try {
                 client = new Socket(ipConection, Integer.parseInt(conectionPort));
-                dos = (DataOutputStream) client.getOutputStream();
+                dos = new DataOutputStream(client.getOutputStream());
                 String data = menuResult;
                 dos.writeUTF(data);
             } catch (IOException e) {
