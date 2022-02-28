@@ -12,6 +12,7 @@ public class Servidor {
     private final Socket client = null;
     private final DataOutputStream dos = null;
     private final DataInputStream dis = null;
+
     public static void main(String[] args) {
 
 
