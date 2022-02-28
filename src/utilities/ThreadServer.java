@@ -9,48 +9,60 @@ public class ThreadServer extends Thread{
 
     private static final String fileUsers = "D:\\CURSO21-22\\PSP\\PROJECTS\\AppPSP\\ficheros\\usuarios.txt";
     private static Socket client;
-    private DataInputStream dis;
+    private static DataInputStream dis;
     private static DataOutputStream dos;
+
     public ThreadServer(Socket client) {
         this.client = client;
     }
 
     public static void listClients() {
+        BufferedReader br;
+        int lines;
+        int count = 0;
+        ArrayList<String> words;
+
         try {
-            BufferedReader br = new BufferedReader(new FileReader(fileUsers));
-            int lines = getNumberOfRows(fileUsers);
+            br = new BufferedReader(new FileReader(fileUsers));
+            lines = getNumberOfRows(fileUsers);
             String phrases[] = new String[lines];
-            ArrayList<String> words = new ArrayList<>();
-            int cont = 0;
             String line = br.readLine();
-            // OBTENER LINEAS FICHERO
+
+            // Obtener las lineas del fichero "usuarios.txt"
             while (line != null) {
-                phrases[cont] = line;
+                phrases[count] = line;
                 line = br.readLine();
-                cont++;
+                count++;
             }
 
+            words = new ArrayList<>();
+            // Separar las lineas por el separador "|"
             for (int i = 0; i < phrases.length; i++) {
                 words.add(Arrays.toString(phrases[i].split("\\|")));
             }
 
+            // Enviar los nombres de usuario al cliente
             dos = new DataOutputStream(client.getOutputStream());
-            dos.writeUTF(words.get(1));
+            for (int i = 0; i < words.size(); i += 3) {
+                dos.writeUTF(words.get(i));
+            }
 
             br.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
     }
 
-    public static int getNumberOfRows(String fileUsers) throws FileNotFoundException {
-        BufferedReader br = new BufferedReader(new FileReader(fileUsers));
+    /***
+     * Clase para obtener el número de filas que hay en un fichero
+     * @param file
+     * @return int con el numero de lineas
+     */
+    public static int getNumberOfRows(String file) {
+        BufferedReader br;
         int lines = 0;
         try {
+            br = new BufferedReader(new FileReader(file));
             while (br.readLine() != null) lines++;
             br.close();
         } catch (IOException e) {
@@ -60,10 +72,12 @@ public class ThreadServer extends Thread{
     }
 
     public void run() {
+        String clientOption;
         try {
             dis = new DataInputStream(client.getInputStream());
             System.out.println("CLIENTE: " + client.toString() + " CONECTADO.");
-            String clientOption = dis.readUTF();
+
+            clientOption = dis.readUTF();
             if (!clientOption.equals("3")) {
                 switch (clientOption) {
                     case "1":

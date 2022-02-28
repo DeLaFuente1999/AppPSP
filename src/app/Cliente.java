@@ -24,21 +24,20 @@ public class Cliente {
         if (menuResult.equals("1") || menuResult.equals("2")) {
             try {
                 client = new Socket(ipConection, Integer.parseInt(conectionPort));
+
+                // Enviar datos al servidor
                 dos = new DataOutputStream(client.getOutputStream());
                 String data = menuResult;
                 dos.writeUTF(data);
 
+                // Recoger datos del servidor
                 dis = new DataInputStream(client.getInputStream());
                 System.out.println("O server devolve: " + dis.readUTF());
-
-
             } catch (IOException e) {
                 e.printStackTrace();
             }
         } else if (menuResult.equals("3")) {
             System.exit(0);
         }
-
-
     }
 }
