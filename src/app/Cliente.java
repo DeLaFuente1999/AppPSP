@@ -18,7 +18,7 @@ public class Cliente {
     private static DataOutputStream dos = null;
     private static ObjectInputStream ois = null;
 
-    public static void main(String[] args) throws IOException, ClassNotFoundException{
+    public static void main(String[] args) throws ClassNotFoundException{
         String ipConection = args[0];
         String conectionPort = args[1];
         String menuResult = String.valueOf(menu.MenuOptions());
