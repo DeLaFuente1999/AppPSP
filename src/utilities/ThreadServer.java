@@ -4,13 +4,14 @@ import java.io.*;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class ThreadServer extends Thread{
 
     private static final String fileUsers = "D:\\CURSO21-22\\PSP\\PROJECTS\\AppPSP\\ficheros\\usuarios.txt";
     private static Socket client;
     private static DataInputStream dis;
-    private static DataOutputStream dos;
+    private static ObjectOutputStream oos;
 
     public ThreadServer(Socket client) {
         this.client = client;
@@ -20,14 +21,14 @@ public class ThreadServer extends Thread{
         BufferedReader br;
         int lines;
         int count = 0;
-        ArrayList<String> words;
+        List<String> words;
 
         try {
             br = new BufferedReader(new FileReader(fileUsers));
             lines = getNumberOfRows(fileUsers);
             String phrases[] = new String[lines];
-            String line = br.readLine();
 
+            String line = br.readLine();
             // Obtener las lineas del fichero "usuarios.txt"
             while (line != null) {
                 phrases[count] = line;
@@ -36,16 +37,22 @@ public class ThreadServer extends Thread{
             }
 
             words = new ArrayList<>();
-            // Separar las lineas por el separador "|"
+            Usuario[] arrayUsr = new Usuario[lines*3];
             for (int i = 0; i < phrases.length; i++) {
-                words.add(Arrays.toString(phrases[i].split("\\|")));
+                String[] phrase = phrases[i].split("\\|");
+                words = Arrays.asList(phrase);
+
+                arrayUsr[i] = new Usuario(words.get(0), words.get(1), words.get(2));
+
             }
 
+            // Separar las lineas por el separador "|"
+
+
             // Enviar los nombres de usuario al cliente
-            dos = new DataOutputStream(client.getOutputStream());
-            for (int i = 0; i < words.size(); i += 3) {
-                dos.writeUTF(words.get(i));
-            }
+            oos = new ObjectOutputStream(client.getOutputStream());
+            oos.writeObject(arrayUsr);
+
 
             br.close();
         } catch (IOException e) {

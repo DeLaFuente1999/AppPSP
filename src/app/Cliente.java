@@ -1,10 +1,12 @@
 package app;
 
 import menu.menu;
+import utilities.Usuario;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -14,9 +16,9 @@ public class Cliente {
     private static ServerSocket server = null;
     private static Socket client = null;
     private static DataOutputStream dos = null;
-    private static DataInputStream dis = null;
+    private static ObjectInputStream ois = null;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, ClassNotFoundException{
         String ipConection = args[0];
         String conectionPort = args[1];
         String menuResult = String.valueOf(menu.MenuOptions());
@@ -31,8 +33,14 @@ public class Cliente {
                 dos.writeUTF(data);
 
                 // Recoger datos del servidor
-                dis = new DataInputStream(client.getInputStream());
-                System.out.println("O server devolve: " + dis.readUTF());
+                //dis = new DataInputStream(client.getInputStream());
+                ois = new ObjectInputStream(client.getInputStream());
+                Usuario[] arrayUsr = (Usuario[]) ois.readObject();
+                System.out.println("Lista de Usuarios: ");
+                for (int i = 0; i < arrayUsr.length / 3; i++) {
+                    System.out.println((i + 1) + ".- " + arrayUsr[i].getName());
+                }
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
