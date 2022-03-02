@@ -1,9 +1,6 @@
 package utilities;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -11,8 +8,7 @@ import java.util.List;
 
 public class ListClients {
 
-    //private static final String fileUsers = "D:\\CURSO21-22\\PSP\\PROJECTS\\AppPSP\\ficheros\\usuarios.txt";
-    private static final String fileUsers = "E:\\Proyectos\\ProyectoPSP\\ficheros\\usuarios.txt";
+    private static final String fileUsers = "ficheros/usuarios.txt";
 
     public static void listClients(ObjectOutputStream oos, Socket client) {
 
@@ -21,8 +17,11 @@ public class ListClients {
         int count = 0;
         List<String> words;
 
+        File usersFile = new File(fileUsers);
+
+
         try {
-            br = new BufferedReader(new FileReader(fileUsers));
+            br = new BufferedReader(new FileReader(usersFile));
             lines = AnalyzeFile.getNumberOfRows(fileUsers);
             String phrases[] = new String[lines];
 
