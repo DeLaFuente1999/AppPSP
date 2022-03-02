@@ -33,9 +33,13 @@ public class ThreadServer extends Thread{
                     case "2":
                         System.out.println("El cliente ha seleccionado: CONSULTAR SALDO");
                         break;
+                    case "3":
+                        System.out.println("CLIENTE: " + client.toString() + " DESCONECTADO.");
+                        client.close();
+                        break;
                 }
             }
-            System.out.println("CLIENTE: " + client.toString() + " DESCONECTADO.");
+
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -10,7 +10,7 @@ import java.net.Socket;
 
 public class Servidor {
 
-    private static final int PORT = 9500;
+    private static final int PORT = 9501;
     private static ServerSocket server = null;
     private static Socket client = null;
     private static DataOutputStream dos = null;

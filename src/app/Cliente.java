@@ -12,21 +12,20 @@ import java.net.Socket;
 
 public class Cliente {
 
-    private static final int PROGRAMPORT = 9500;
+    private static final String PROGRAMPORT = "9501";
     private static ServerSocket server = null;
     private static Socket client = null;
     private static DataOutputStream dos = null;
     private static ObjectInputStream ois = null;
 
-    public static void main(String[] args) throws ClassNotFoundException{
+    public static void main(String[] args) throws ClassNotFoundException, IOException {
         String ipConection = args[0];
-        String conectionPort = args[1];
-        String menuResult = String.valueOf(menu.MenuOptions());
-
-        if (menuResult.equals("1") || menuResult.equals("2")) {
+        String conectionPort = PROGRAMPORT;
+        String menuResult = "0";
+        client = new Socket(ipConection, Integer.parseInt(conectionPort));
+        while (!menuResult.equals("3")) {
             try {
-                client = new Socket(ipConection, Integer.parseInt(conectionPort));
-
+                menuResult = String.valueOf(menu.MenuOptions());
                 // Enviar datos al servidor
                 dos = new DataOutputStream(client.getOutputStream());
                 String data = menuResult;
@@ -44,8 +43,6 @@ public class Cliente {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        } else if (menuResult.equals("3")) {
-            System.exit(0);
         }
     }
 }
