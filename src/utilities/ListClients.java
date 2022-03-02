@@ -16,9 +16,7 @@ public class ListClients {
         int lines;
         int count = 0;
         List<String> words;
-
         File usersFile = new File(fileUsers);
-
 
         try {
             br = new BufferedReader(new FileReader(usersFile));
@@ -33,23 +31,17 @@ public class ListClients {
                 count++;
             }
 
-            words = new ArrayList<>();
-            Usuario[] arrayUsr = new Usuario[lines*3];
+            Usuario[] arrayUsr = new Usuario[lines];
             for (int i = 0; i < phrases.length; i++) {
                 String[] phrase = phrases[i].split("\\|");
                 words = Arrays.asList(phrase);
 
                 arrayUsr[i] = new Usuario(words.get(0), words.get(1), words.get(2));
-
             }
-
-            // Separar las lineas por el separador "|"
-
 
             // Enviar los nombres de usuario al cliente
             oos = new ObjectOutputStream(client.getOutputStream());
             oos.writeObject(arrayUsr);
-
 
             br.close();
         } catch (IOException e) {

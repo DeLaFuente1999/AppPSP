@@ -37,7 +37,7 @@ public class Cliente {
                 ois = new ObjectInputStream(client.getInputStream());
                 Usuario[] arrayUsr = (Usuario[]) ois.readObject();
                 System.out.println("Lista de Usuarios: ");
-                for (int i = 0; i < arrayUsr.length / 3; i++) {
+                for (int i = 0; i < arrayUsr.length; i++) {
                     System.out.println((i + 1) + ".- " + arrayUsr[i].getName());
                 }
 

@@ -17,15 +17,6 @@ public class ThreadServer extends Thread{
         this.client = client;
     }
 
-
-
-    /***
-     * Clase para obtener el número de filas que hay en un fichero
-     * @param
-     * @return int con el numero de lineas
-     */
-
-
     public void run() {
         String clientOption;
         try {
