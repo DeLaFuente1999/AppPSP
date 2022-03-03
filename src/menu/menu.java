@@ -8,9 +8,9 @@ public class menu {
      * Clase que crea un menu de 3 opciones.
      * @return int con la opcion seleccionada.
      */
+
     public static int MenuOptions() {
         Scanner scanner = new Scanner(System.in);
-        // boolean exit = false;
         int option = 0;
 
         System.out.println("1. Listar Clientes");

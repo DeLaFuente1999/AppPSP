@@ -19,13 +19,17 @@ public class Cliente {
     private static ObjectInputStream ois = null;
 
     public static void main(String[] args) throws ClassNotFoundException, IOException {
+
         String ipConection = args[0];
         String conectionPort = PROGRAMPORT;
-        String menuResult = "0";
         client = new Socket(ipConection, Integer.parseInt(conectionPort));
-        while (!menuResult.equals("3")) {
-            try {
-                menuResult = String.valueOf(menu.MenuOptions());
+
+        String menuResult = String.valueOf(menu.MenuOptions());
+
+
+        try {
+            while (!menuResult.equals("3")) {
+
                 // Enviar datos al servidor
                 dos = new DataOutputStream(client.getOutputStream());
                 String data = menuResult;
@@ -36,15 +40,16 @@ public class Cliente {
                 ois = new ObjectInputStream(client.getInputStream());
                 Usuario[] arrayUsr = (Usuario[]) ois.readObject();
                 System.out.println("Lista de Usuarios: ");
+
                 for (int i = 0; i < arrayUsr.length; i++) {
                     System.out.println((i + 1) + ".- " + arrayUsr[i].getName());
                 }
-
-            } catch (IOException e) {
-                e.printStackTrace();
+                System.out.println("");
+                menuResult = String.valueOf(menu.MenuOptions());
             }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-
         client.close();
         dos.close();
         ois.close();
