@@ -44,5 +44,9 @@ public class Cliente {
                 e.printStackTrace();
             }
         }
+
+        client.close();
+        dos.close();
+        ois.close();
     }
 }

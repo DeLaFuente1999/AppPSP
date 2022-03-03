@@ -39,7 +39,8 @@ public class ThreadServer extends Thread{
                         break;
                 }
             }
-
+            client.close();
+            dis.close();
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -13,8 +13,6 @@ public class Servidor {
     private static final int PORT = 9501;
     private static ServerSocket server = null;
     private static Socket client = null;
-    private static DataOutputStream dos = null;
-    private static DataInputStream dis = null;
 
     public static void main(String[] args) {
         try {
@@ -28,6 +26,5 @@ public class Servidor {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 }
