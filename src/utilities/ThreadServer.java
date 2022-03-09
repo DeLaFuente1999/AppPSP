@@ -26,7 +26,6 @@ public class ThreadServer extends Thread {
 
             clientOption = dis.readInt();
 
-            //while (!clientOption.equals("3") ) {
             while (clientOption != 3 ) {
                 switch (clientOption) {
                     case 1:

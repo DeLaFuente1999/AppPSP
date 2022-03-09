@@ -12,13 +12,14 @@ public class ListClients {
 
     public static void listClients(ObjectOutputStream oos, Socket client) {
 
-        BufferedReader br;
+        BufferedReader br = null;
         int lines;
         int count = 0;
         List<String> words;
         File usersFile = new File(fileUsers);
 
         try {
+
             br = new BufferedReader(new FileReader(usersFile));
             lines = AnalyzeFile.getNumberOfRows(fileUsers);
             String phrases[] = new String[lines];
