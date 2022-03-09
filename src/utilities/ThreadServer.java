@@ -18,29 +18,32 @@ public class ThreadServer extends Thread {
     }
 
     public void run() {
-        String clientOption = "0";
+        int clientOption;
+
         try {
             dis = new DataInputStream(client.getInputStream());
             System.out.println("CLIENTE: " + client.toString() + " CONECTADO.");
 
-            clientOption = dis.readUTF();
+            clientOption = dis.readInt();
 
-            while (!clientOption.equals("3") ) {
-
+            //while (!clientOption.equals("3") ) {
+            while (clientOption != 3 ) {
                 switch (clientOption) {
-                    case "1":
+                    case 1:
                         System.out.println("El cliente ha seleccionado: LISTAR CLIENTES");
                         ListClients.listClients(oos, client);
-                        clientOption = dis.readUTF();
                         break;
-                    case "2":
+                    case 2:
                         System.out.println("El cliente ha seleccionado: CONSULTAR SALDO");
                         break;
                 }
+
+                clientOption = dis.readInt();
+
             }
+            System.out.println("CLIENTE: " + client.toString() + " DESCONECTADO.");
         } catch (IOException e) {
             e.printStackTrace();
-            System.out.println("CLIENTE: " + client.toString() + " DESCONECTADO.");
         }
     }
 }

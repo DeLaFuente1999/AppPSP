@@ -13,7 +13,6 @@ import java.net.Socket;
 public class Cliente {
 
     private static final String PROGRAMPORT = "9501";
-    private static ServerSocket server = null;
     private static Socket client = null;
     private static DataOutputStream dos = null;
     private static ObjectInputStream ois = null;
@@ -24,29 +23,29 @@ public class Cliente {
         String conectionPort = PROGRAMPORT;
         client = new Socket(ipConection, Integer.parseInt(conectionPort));
 
-        String menuResult = String.valueOf(menu.MenuOptions());
+        int menuResult = menu.MenuOptions();
 
 
         try {
-            while (!menuResult.equals("3")) {
+                while (menuResult != 3) {
 
-                // Enviar datos al servidor
-                dos = new DataOutputStream(client.getOutputStream());
-                String data = menuResult;
-                dos.writeUTF(data);
+                    // Enviar datos al servidor
+                    dos = new DataOutputStream(client.getOutputStream());
+                    dos.writeInt(menuResult);
 
-                // Recoger datos del servidor
-                //dis = new DataInputStream(client.getInputStream());
-                ois = new ObjectInputStream(client.getInputStream());
-                Usuario[] arrayUsr = (Usuario[]) ois.readObject();
-                System.out.println("Lista de Usuarios: ");
+                    // Recoger datos del servidor
+                    ois = new ObjectInputStream(client.getInputStream());
+                    Usuario[] arrayUsr = (Usuario[]) ois.readObject();
+                    System.out.println("Lista de Usuarios: ");
 
-                for (int i = 0; i < arrayUsr.length; i++) {
-                    System.out.println((i + 1) + ".- " + arrayUsr[i].getName());
+                    for (int i = 0; i < arrayUsr.length; i++) {
+                        System.out.println((i + 1) + ".- " + arrayUsr[i].getName());
+                    }
+                    System.out.println("");
+                    menuResult = menu.MenuOptions();
                 }
-                System.out.println("");
-                menuResult = String.valueOf(menu.MenuOptions());
-            }
+                dos.writeInt(3);
+
         } catch (IOException e) {
             e.printStackTrace();
         }
