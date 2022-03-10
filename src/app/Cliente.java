@@ -1,6 +1,7 @@
 package app;
 
 import menu.menu;
+import utilities.Balance;
 import utilities.Usuario;
 
 import java.io.*;
@@ -34,6 +35,7 @@ public class Cliente {
                     dos = new DataOutputStream(client.getOutputStream());
                     dos.writeInt(menuResult);
 
+
                     if (menuResult == 1) {
                         // Recoger datos del servidor
                         ois = new ObjectInputStream(client.getInputStream());
@@ -65,16 +67,10 @@ public class Cliente {
 
                         // Recoger datos del servidor
 
+                        ois = new ObjectInputStream(client.getInputStream());
 
-                        dis = new DataInputStream(client.getInputStream());
-
-                        String money = dis.readUTF();
-                        String transactionData = dis.readUTF();
-
-                        System.out.println("Datos: ");
-                        System.out.println("\tSaldo disponible:" + money);
-                        System.out.println("\tFecha de la ultima transaccion: " + transactionData);
-
+                        Balance balance = (Balance) ois.readObject();
+                        System.out.println(balance.toString());
 
                         System.out.println("");
                     }
