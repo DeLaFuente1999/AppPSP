@@ -8,18 +8,16 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-public class Servidor {
+public class Servidor extends Thread {
 
-    private static final int PORT = 9501;
-    private static ServerSocket server = null;
-    private static Socket client = null;
+    private static final int PORT = 9503;
 
     public static void main(String[] args) {
         try {
-            server = new ServerSocket(PORT);
+            ServerSocket server = new ServerSocket(PORT);
             System.out.println("SERVIDOR INICIADO...");
             while (true) {
-                client = server.accept();
+                Socket client = server.accept();
                 ThreadServer thread = new ThreadServer(client);
                 thread.start();
             }

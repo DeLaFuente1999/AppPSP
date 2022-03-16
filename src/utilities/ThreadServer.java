@@ -6,21 +6,28 @@ import java.net.Socket;
 public class ThreadServer extends Thread {
 
 
-    private static Socket client;
-    private static DataInputStream dis;
-    private static ObjectOutputStream oos;
-    private static DataOutputStream dos = null;
+    private Socket client;
+    private DataInputStream dis;
+    private ObjectOutputStream oos;
+    private DataOutputStream dos = null;
 
     public ThreadServer(Socket client) {
         this.client = client;
+        
+		try {
+			this.dis = new DataInputStream(client.getInputStream());
+			this.dos = new DataOutputStream(client.getOutputStream());
+		} catch (IOException e) {			
+			e.printStackTrace();
+			System.out.println("no voy");
+		}
+		
     }
 
     public void run() {
         int clientOption;
 
         try {
-            dis = new DataInputStream(client.getInputStream());
-            dos = new DataOutputStream(client.getOutputStream());
             System.out.println("CLIENTE: " + client.toString() + " CONECTADO.");
 
             clientOption = dis.readInt();

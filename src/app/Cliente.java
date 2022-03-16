@@ -12,7 +12,7 @@ import java.util.Scanner;
 
 public class Cliente {
 
-    private static final String PROGRAMPORT = "9501";
+    private static final String PROGRAMPORT = "9503";
     private static Socket client = null;
     private static DataOutputStream dos = null;
     private static ObjectInputStream ois = null;
@@ -53,7 +53,7 @@ public class Cliente {
                         String user;
                         String passw;
 
-                        System.out.println("Introduzca usuario: ");
+                        System.out.println("Introduzca DNI: ");
                         user = br.readLine();
                         System.out.println("Introduzca contraseña: ");
                         passw = br.readLine();
