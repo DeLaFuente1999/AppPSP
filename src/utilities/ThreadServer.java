@@ -19,7 +19,6 @@ public class ThreadServer extends Thread {
 			this.dos = new DataOutputStream(client.getOutputStream());
 		} catch (IOException e) {			
 			e.printStackTrace();
-			System.out.println("no voy");
 		}
 		
     }
@@ -28,18 +27,18 @@ public class ThreadServer extends Thread {
         int clientOption;
 
         try {
-            System.out.println("CLIENTE: " + client.toString() + " CONECTADO.");
+            LogUtilites.AddLogLine("CLIENTE: " + client.toString() + " CONECTADO.");
 
             clientOption = dis.readInt();
 
             while (clientOption != 3 ) {
                 switch (clientOption) {
                     case 1:
-                        System.out.println("El cliente ha seleccionado: LISTAR CLIENTES");
+                        LogUtilites.AddLogLine("El cliente " + client.getInetAddress() + " ha seleccionado: LISTAR CLIENTES");
                         ListClients.listClients(client);
                         break;
                     case 2:
-                        System.out.println("El cliente ha seleccionado: CONSULTAR SALDO");
+                        LogUtilites.AddLogLine("El cliente " + client.getInetAddress() + " ha seleccionado: CONSULTAR SALDO");
                         String dni;
                         Boolean result = ListBalance.CheckUserPwd(dni = dis.readUTF(),dis.readUTF(), client);
                         if (result) {
@@ -51,7 +50,7 @@ public class ThreadServer extends Thread {
                 clientOption = dis.readInt();
 
             }
-            System.out.println("CLIENTE: " + client.toString() + " DESCONECTADO.");
+            LogUtilites.AddLogLine("CLIENTE: " + client.toString() + " DESCONECTADO.");
         } catch (IOException e) {
             e.printStackTrace();
         }
