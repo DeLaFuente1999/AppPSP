@@ -12,7 +12,6 @@ import java.util.Scanner;
 
 public class Cliente {
 
-    private static final String PROGRAMPORT = "9503";
     private static Socket client = null;
     private static DataOutputStream dos = null;
     private static ObjectInputStream ois = null;
@@ -21,7 +20,7 @@ public class Cliente {
     public static void main(String[] args) throws ClassNotFoundException, IOException {
 
         String ipConection = args[0];
-        String conectionPort = PROGRAMPORT;
+        String conectionPort = args[1];
         client = new Socket(ipConection, Integer.parseInt(conectionPort));
 
         int menuResult = menu.MenuOptions();

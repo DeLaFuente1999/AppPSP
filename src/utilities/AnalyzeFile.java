@@ -19,28 +19,4 @@ public class AnalyzeFile {
         }
         return lines;
     }
-
-    public static int getNumberOfWords(String file) throws IOException {
-        int lines = AnalyzeFile.getNumberOfRows(file);
-        String phrases[] = new String[lines];
-        List<String> words = null;
-
-        BufferedReader br = new BufferedReader(new FileReader(file));
-        String line = br.readLine();
-
-        int count = 0;
-        // Obtener las lineas del fichero "usuarios.txt"
-        while (line != null) {
-            phrases[count] = line;
-            line = br.readLine();
-            count++;
-        }
-
-        for (int i = 0; i < phrases.length; i++) {
-            String[] phrase = phrases[i].split("\\|");
-            words = Arrays.asList(phrase);
-        }
-
-        return words.size();
-    }
 }

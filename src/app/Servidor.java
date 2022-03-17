@@ -14,7 +14,7 @@ import java.time.format.DateTimeFormatter;
 
 public class Servidor extends Thread {
 
-    private static final int PORT = 9503;
+    private static final int PORT = 9500;
 
     public static void main(String[] args) {
 
