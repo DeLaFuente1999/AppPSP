@@ -28,7 +28,7 @@ public class Balance implements Serializable {
     public void setFecha(String fecha) {
         this.fecha = fecha;
     }
-
+    
     @Override
     public String toString() {
         return "El saldo disponible es: " + getSaldo() + "\n" +

@@ -65,11 +65,15 @@ public class Cliente {
 
 
                         // Recoger datos del servidor
-
                         ois = new ObjectInputStream(client.getInputStream());
 
                         Balance balance = (Balance) ois.readObject();
-                        System.out.println(balance.toString());
+                        
+                        if(balance.getSaldo().equals("error") && balance.getFecha().equals("error")) {
+                        	System.out.println("El usuario o la contraseña no son correctas, revise los campos.");
+                        } else {
+                            System.out.println(balance.toString());
+						}
 
                         System.out.println("");
                     }

@@ -5,59 +5,63 @@ import java.net.Socket;
 
 public class ListBalance {
 
+	private static ObjectOutputStream oos = null;
 
-    public static boolean CheckUserPwd(String dni, String pwd, Socket client) {
+	public static boolean CheckUserPwd(String dni, String pwd, Socket client) {
 
-        Boolean result = false;
+		Boolean result = false;
 
-        try {
-            Usuario[] arrayUsr = GenerateUsers.Generate();
+		try {
+			Usuario[] arrayUsr = GenerateUsers.Generate();
 
+			for (int i = 0; i < arrayUsr.length; i++) {
+				if (arrayUsr[i].getDni().equals(dni) && arrayUsr[i].getPassword().equals(pwd)) {
+					result = true;
+				}
+			}
 
-            for (int i = 0; i < arrayUsr.length; i++) {
-                if (arrayUsr[i].getDni().equals(dni) && arrayUsr[i].getPassword().equals(pwd)) {
-                    result = true;
-                }
-            }
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+		return result;
+	}
 
-        return result;
-    }
+	public static Balance ReadUserBalance(String dni, Socket client) throws IOException {
 
-    public static Balance ReadUserBalance(String dni, Socket client) throws IOException {
+		String fileUsers = "ficheros/" + dni + ".txt";
 
-        String fileUsers = "ficheros/" + dni + ".txt";
+		BufferedReader br;
+		File usersFile = new File(fileUsers);
 
-        BufferedReader br;
-        File usersFile = new File(fileUsers);
+		String[] account = new String[3];
 
-        String[] account = new String[3];
+		int i = 0;
 
-        int i = 0;
+		br = new BufferedReader(new FileReader(usersFile));
 
+		String line = "";
 
-        br = new BufferedReader(new FileReader(usersFile));
+		while (line != null) {
+			line = br.readLine();
+			account[i] = line;
+			i++;
+		}
 
-        String line = "";
+		Balance balance = new Balance(account[0], account[1]);
 
+		oos = new ObjectOutputStream(client.getOutputStream());
+		oos.writeObject(balance);
 
-        while (line != null) {
-            line = br.readLine();
-            account[i] = line;
-            i++;
-        }
+		return balance;
 
-        Balance balance = new Balance(account[0], account[1]);
+	}
 
-        ObjectOutputStream oos = new ObjectOutputStream(client.getOutputStream());
-        oos.writeObject(balance);
+	public static void ErrorUser(Socket client) throws IOException {
 
+		Balance balance = new Balance("error", "error");
+		oos = new ObjectOutputStream(client.getOutputStream());
+		oos.writeObject(balance);
 
-        return balance;
-
-
-    }
+	}
 }
