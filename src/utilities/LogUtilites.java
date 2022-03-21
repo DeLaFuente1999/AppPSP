@@ -22,7 +22,7 @@ public class LogUtilites {
         String s = currentRelativePath.toAbsolutePath().toString();
 
 
-        file = new File(s + "\\src\\log\\server.log");
+        file = new File(s + "\\log\\server.log");
 
         try {
             bw = new BufferedWriter(new FileWriter(file, true));

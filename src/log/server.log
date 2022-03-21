@@ -162,3 +162,15 @@
 2022/03/20 21:00:36	El cliente /127.0.0.1 ha seleccionado: CONSULTAR SALDO
 2022/03/20 21:00:36	El cliente /127.0.0.1 ha seleccionado: LISTAR CLIENTES
 2022/03/20 21:00:36	El cliente /127.0.0.1 ha seleccionado: CONSULTAR SALDO
+
+2022/03/21 00:37:23	SERVIDOR INICIADO
+
+2022/03/21 01:23:56	SERVIDOR INICIADO
+2022/03/21 01:23:56	CLIENTE: Socket[addr=/127.0.0.1,port=63569,localport=9500] CONECTADO.
+2022/03/21 01:23:56	CLIENTE: Socket[addr=/127.0.0.1,port=63621,localport=9500] CONECTADO.
+2022/03/21 01:23:56	El cliente /127.0.0.1 ha seleccionado: LISTAR CLIENTES
+2022/03/21 01:23:56	El cliente /127.0.0.1 ha seleccionado: LISTAR CLIENTES
+2022/03/21 01:23:56	El cliente /127.0.0.1 ha seleccionado: LISTAR CLIENTES
+2022/03/21 01:23:56	El cliente /127.0.0.1 ha seleccionado: CONSULTAR SALDO
+2022/03/21 01:23:56	CLIENTE: Socket[addr=/127.0.0.1,port=63621,localport=9500] DESCONECTADO.
+2022/03/21 01:23:56	CLIENTE: Socket[addr=/127.0.0.1,port=63632,localport=9500] CONECTADO.

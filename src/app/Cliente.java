@@ -21,7 +21,13 @@ public class Cliente {
 
         String ipConection = args[0];
         String conectionPort = args[1];
-        client = new Socket(ipConection, Integer.parseInt(conectionPort));
+        
+        try {
+            client = new Socket(ipConection, Integer.parseInt(conectionPort));
+		} catch (Exception e) {
+			System.out.println("No se ha podido conectar con el servidor.");
+			System.exit(500);
+		}
 
         int menuResult = menu.MenuOptions();
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -82,7 +88,7 @@ public class Cliente {
                 dos.writeInt(3);
 
         } catch (IOException e) {
-            e.printStackTrace();
+        	e.printStackTrace();
         }
         client.close();
         dos.close();

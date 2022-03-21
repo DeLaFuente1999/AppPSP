@@ -34,7 +34,6 @@ public class ThreadServer extends Thread {
             while (clientOption != 3 ) {
                 switch (clientOption) {
                     case 1:
-                        //LogUtilites.AddLogLine("El cliente " + client.getInetAddress() + " ha seleccionado: LISTAR CLIENTES");
                     	LogUtilites.AddLogLine("El cliente " + client.getInetAddress() + " ha seleccionado: LISTAR CLIENTES");
                         ListClients.listClients(client);
                         break; 
